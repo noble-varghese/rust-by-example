@@ -1,0 +1,21 @@
+Rust Ownership
+       - Each value has a variable and that's called its owner
+       - There can be only one owner at a time.
+       - When the owner goes out of scope, the value will be dropped.
+
+    Stack overflow might happen when variables are continuously declared on the stack in a loop.
+    Why is ownship moved or transfered in case of non-primitive type such as a string or a vector.
+        This is because the memory allocation for those types happen on the heap memory and not on the stack. Using the heap involves
+        the use of the OS for memory allocation and returning a pointer to that location.
+    
+
+
+References Rules
+    - One mutable referenece in a scope.
+        This is because it avoids a condition called data race. data race is a condition in which two pieces which can run concurrently 
+        tries to update the same variable at the same time. It leads to incorrect variable value and causes faulty value of the variable.
+    - Many immutable references
+    - Mutable and immutable references cannot co-exist.
+    - Scope of a reference
+    - Data shouldn't change when immutable references are in scope.
+    
