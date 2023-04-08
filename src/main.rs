@@ -490,12 +490,165 @@ and finally you will compute the difference = 225 - 55 = 170.
 
 // Hashmaps
 
-use std::{collections::HashMap, hash::Hash};
+// use std::{collections::HashMap, hash::Hash};
+
+// fn main() {
+//     let mut person = HashMap::new();
+//     person.insert("Noble", 40);
+//     person.insert("Robin", 30);
+//     person.insert("Mikku", 20);
+
+//     println!("The age is {:?}", person.get("Noble").unwrap());
+
+//     if person.contains_key("Noble") {
+//         println!("Yes the hashmap contains the value");
+//     } else {
+//         println!("Nope the hashmap doesn't have the value");
+//     }
+
+//     match person.get("Robin") {
+//         Some(value) => println!("Yes the value exist: {}", value),
+//         None => println!("Nope the value is nto exsiting..."),
+//     }
+
+//     for (name, age) in &person {
+//         println!("The person {} has an age of {}", name, age);
+//     }
+
+//     let mut likes = HashMap::new();
+//     likes.insert("Noble", "Mango");
+//     likes.insert("Robin", "Apple");
+//     likes.insert("Mikku", "Banana");
+
+//     // Vectors with values in hash map
+
+//     let some_vec = vec![2, 3, 4, 6, 6, 6, 78, 8, 9, 9, 0, 4, 6, 3, 22];
+//     let mut freq_vec = HashMap::new();
+//     for i in &some_vec {
+//         let freq = freq_vec.entry(*i).or_insert(0);
+//         *freq += 1;
+//     }
+//     println!("The final value is {:?}", freq_vec);
+// }
+
+//Lifetimes
+/*
+    Why do we use lifetime ?
+    Dangling reference or danlging pointer:
+        Danlging reeferences are mostly encountered when dealing with functions.
+        Undermined lifetimes.
+        lifetime will correspond to the minimum lifetime of the two references in question.
+
+*/
+
+// fn main() {
+//     let s1 = "Hello";
+//     let v: &str;
+//     {
+//         let s2 = String::from("World");
+//         v = some_fn(s1, s2.as_str());
+//     }
+
+//     println!("{}", v);
+// }
+
+// fn some_fn<'a, 'b>(first_str: &'a str, second_str: &'b str) -> &'a str {
+//     println!("{}", second_str);
+//     first_str
+// }
+
+// fn main() {
+//     let i = 50;
+//     let result: &i32;
+//     {
+//         let j = 80;
+//         result = greater(&i, &j);
+//         println!("{}", result);
+//     }
+// }
+
+// fn greater<'a>(i: &'a i32, j: &'a i32) -> &'a i32 {
+//     if i > j {
+//         i
+//     } else {
+//         j
+//     }
+// }
+
+// struct Person<'a> {
+//     name: &'a str,
+//     age: i32,
+// }
+
+// fn main() {
+//     let first_name = "Nouman";
+//     let mut nouman = Person {
+//         name: first_name,
+//         age: 40,
+//     };
+//     let last_name = String::from("Varghese");
+//     nouman.name = &last_name;
+
+//     println!(
+//         "The name of the person is {} and his age is {}",
+//         nouman.name, nouman.age
+//     );
+// }
+
+// Closure:
+/*
+   Closures:
+       - They are functions without names.
+       - Any body if the closure is defined between the two pipe symbols.
+            - If there is only one statement inside a closure, then we do not have to keep the body in side the pipes.
+        - We can pass the closure as a parameter to another function.
+        More on the closures:
+        -
+*/
+
+// fn main() {
+//     let x = 32;
+//     let sqaure = |num: i32| println!("The square fo the variable is {}", num * num);
+//     sqaure(x);
+
+//     let y = 89;
+//     sqaure(y);
+
+//     let print_info = |general_info: &str, name: &str, age: i32| {
+//         println!("{}\n\t{}: {}", general_info, name, age)
+//     };
+//     let general_info = String::from("The details are ");
+//     let (person_name, person_age) = (String::from("Noble"), 27);
+//     print_info(general_info.as_str(), &person_name, person_age);
+// }
+
+fn division<F: Fn(f32) -> bool>(x: f32, y: f32, f: F) {
+    if f(y) == true {
+        println!("The division result is {}", (x / y) as f32);
+    } else {
+        println!("The division is not possible");
+    }
+}
 
 fn main() {
-    let mut person = HashMap::new();
-    person.insert("Noble", 27);
-    person.insert("Robin", 33);
+    let division_status = |y: f32| {
+        if y != 0.0 {
+            true
+        } else {
+            false
+        }
+    };
+    division(30.0, 6.0, division_status);
+    division(5.0, 0.0, division_status);
 
-    println!("The age of Noble is {}", person.get("Noble").unwrap());
+    let mut vec_1 = vec![2, 3, 4, 6];
+    vec_1[1] = 67;
+    let mut some_closure = || {
+        vec_1.push(43);
+        println!("The vector here is : {:?}", vec_1);
+    };
+    some_closure();
+    vec_1[1] = 67;
+
+
 }
