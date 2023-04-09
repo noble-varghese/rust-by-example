@@ -622,33 +622,49 @@ and finally you will compute the difference = 225 - 55 = 170.
 //     print_info(general_info.as_str(), &person_name, person_age);
 // }
 
-fn division<F: Fn(f32) -> bool>(x: f32, y: f32, f: F) {
-    if f(y) == true {
-        println!("The division result is {}", (x / y) as f32);
-    } else {
-        println!("The division is not possible");
-    }
+// fn division<F: Fn(f32) -> bool>(x: f32, y: f32, f: F) {
+//     if f(y) == true {
+//         println!("The division result is {}", (x / y) as f32);
+//     } else {
+//         println!("The division is not possible");
+//     }
+// }
+
+// fn main() {
+//     let division_status = |y: f32| {
+//         if y != 0.0 {
+//             true
+//         } else {
+//             false
+//         }
+//     };
+//     division(30.0, 6.0, division_status);
+//     division(5.0, 0.0, division_status);
+
+//     let mut vec_1 = vec![2, 3, 4, 6];
+//     vec_1[1] = 67;
+//     let mut some_closure = || {
+//         vec_1.push(43);
+//         println!("The vector here is : {:?}", vec_1);
+//     };
+//     some_closure();
+//     vec_1[1] = 67;
+
+// }
+
+/// Function Types
+/// Use of the functional pointers will be used to use some external functinos or APIs.
+
+fn prints_name(name: &str) {
+    println!("The name of the person is {}", name);
+}
+
+fn prints_full_info(f: fn(&str), some_one: &str, age: i32) {
+    f(some_one);
+    println!(" and the age of the person is {}", age);
 }
 
 fn main() {
-    let division_status = |y: f32| {
-        if y != 0.0 {
-            true
-        } else {
-            false
-        }
-    };
-    division(30.0, 6.0, division_status);
-    division(5.0, 0.0, division_status);
-
-    let mut vec_1 = vec![2, 3, 4, 6];
-    vec_1[1] = 67;
-    let mut some_closure = || {
-        vec_1.push(43);
-        println!("The vector here is : {:?}", vec_1);
-    };
-    some_closure();
-    vec_1[1] = 67;
-
-
+    let (name, age) = (String::from("Noble"), 40);
+    prints_full_info(prints_name, &name, age);
 }
