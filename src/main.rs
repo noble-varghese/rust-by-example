@@ -709,7 +709,7 @@ fn main() {
     let mapped_values = b
         .iter()
         .map(|x| 2 * *x)
-        .filter(|&x| x > 10)
+        .filter(|x| *x > 10)
         .collect::<Vec<u32>>();
     println!("The mapped values are: {:?}", mapped_values);
 
