@@ -655,16 +655,67 @@ and finally you will compute the difference = 225 - 55 = 170.
 /// Function Types
 /// Use of the functional pointers will be used to use some external functinos or APIs.
 
-fn prints_name(name: &str) {
-    println!("The name of the person is {}", name);
-}
+// fn prints_name(name: &str) {
+//     println!("The name of the person is {}", name);
+// }
 
-fn prints_full_info(f: fn(&str), some_one: &str, age: i32) {
-    f(some_one);
-    println!(" and the age of the person is {}", age);
-}
+// fn prints_full_info(f: fn(&str), some_one: &str, age: i32) {
+//     f(some_one);
+//     println!(" and the age of the person is {}", age);
+// }
+
+// fn main() {
+//     let (name, age) = (String::from("Noble"), 40);
+//     prints_full_info(prints_name, &name, age);
+// }
 
 fn main() {
-    let (name, age) = (String::from("Noble"), 40);
-    prints_full_info(prints_name, &name, age);
+    let some_vec = vec![1, 2, 3, 4, 5, 6, 7, 78];
+    let iter = some_vec.iter().any(|&x| x > 3);
+    let iter_all = some_vec.iter().all(|&x| x > 3);
+
+    println!("The iterms in the array {:?}", iter);
+    println!("The iterms in the array {:?}", iter_all);
+
+    // Find function will search for an element using some condition inside a closure.
+    let find_all = some_vec.iter().find(|&&x| x > 0);
+    println!(
+        " The result of the findall functino is {:?}",
+        find_all.unwrap()
+    );
+
+    let check = some_vec.iter().position(|&x| x > 4);
+    println!(
+        " The result of the findall functino is {:?}",
+        check.unwrap()
+    );
+
+    let check = some_vec.iter().rposition(|&x| x > 78);
+    if check != None {
+        println!(
+            "The result of the position from right is: {:?}",
+            check.unwrap()
+        );
+    }
+
+    let a = vec![1, 2, 3, 4, 5, 6, 6, 7, 7, 8, 8];
+    let filtered_values = a.iter().filter(|&x| *x > 5).collect::<Vec<&u32>>();
+    println!("The filtered values are : {:?}", filtered_values);
+
+    let b = a.clone();
+    let filtered_values = a.into_iter().filter(|&x| x > 5).collect::<Vec<u32>>();
+    println!("The filtered values are : {:?}", filtered_values);
+
+    let mapped_values = b
+        .iter()
+        .map(|x| 2 * *x)
+        .filter(|&x| x > 10)
+        .collect::<Vec<u32>>();
+    println!("The mapped values are: {:?}", mapped_values);
+
+    //     println!("{}", iter.next().unwrap());
+    //     println!("{}", iter.next().unwrap());
+    //     println!("{}", iter.next().unwrap());
+    //     println!("{}", iter.next().unwrap());
+    //     println!("{}", iter.next().unwrap());
 }
