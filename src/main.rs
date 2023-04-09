@@ -720,10 +720,12 @@ and finally you will compute the difference = 225 - 55 = 170.
 //     //     println!("{}", iter.next().unwrap());
 // }
 
-
 // Rust modules
-/* 
-    To organise the files in the rust repository  we use this there is a module system
-    Package > crates > modules
- */
+/*
+   To organise the files in the rust repository  we use this there is a module system
+   Package > crates > modules
+*/
 
+fn main() {
+    println!("Hello World!");
+}
