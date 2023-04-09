@@ -1,0 +1,1 @@
+/Users/noblevarghese/assembly/codebase/rust-by-example/new_package/target/debug/libnew_package.rlib: /Users/noblevarghese/assembly/codebase/rust-by-example/new_package/src/file_1.rs /Users/noblevarghese/assembly/codebase/rust-by-example/new_package/src/file_2.rs /Users/noblevarghese/assembly/codebase/rust-by-example/new_package/src/lib.rs
