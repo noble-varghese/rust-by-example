@@ -1,22 +1,22 @@
 #[derive(Debug)]
-struct LinkedList {
-    head: Pointer,
+struct LinkedList<T: std::fmt::Debug + std::marker::Copy> {
+    head: Pointer<T>,
 }
 
 #[derive(Debug)]
-struct Node {
-    element: i32,
-    next: Pointer,
+struct Node<T: std::fmt::Debug + std::marker::Copy> {
+    element: T,
+    next: Pointer<T>,
 }
 
-type Pointer = Option<Box<Node>>;
+type Pointer<T> = Option<Box<Node<T>>>;
 
-impl LinkedList {
-    fn create_empty_linkedlist() -> LinkedList {
+impl <T: std::fmt::Debug + std::marker::Copy> LinkedList<T>{
+    fn create_empty_linkedlist() -> LinkedList<T> {
         LinkedList { head: None }
     }
 
-    fn add(&mut self, element: i32) {
+    fn add(&mut self, element: T) {
         let previous_head = self.head.take();
         let new_head = Box::new(Node {
             element: element,
@@ -25,7 +25,7 @@ impl LinkedList {
         self.head = Some(new_head);
     }
 
-    fn remove(&mut self) -> Option<i32> {
+    fn remove(&mut self) -> Option<T> {
         let previous_head = self.head.take();
         match previous_head {
             Some(node) => {
@@ -36,7 +36,7 @@ impl LinkedList {
         }
     }
 
-    fn peek(&self) -> Option<i32> {
+    fn peek(&self) -> Option<T> {
         match &self.head {
             Some(node) => Some(node.element),
             None => None,
@@ -48,7 +48,7 @@ impl LinkedList {
         while true {
             match list_traversal {
                 Some(node) => {
-                    println!("{}", node.element);
+                    println!("{:?}", node.element);
                     list_traversal = &node.next;
                 }
                 None => break,
